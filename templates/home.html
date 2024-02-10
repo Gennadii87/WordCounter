@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+</head>
+<body>
+    <h1>Word Counter</h1>
+    <form action="{% url 'load' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ file_form.as_p }}
+        <button type="submit">Load</button>
+    </form>
+    <form action="{% url 'word_count' %}" method="post">
+        {% csrf_token %}
+        {{ word_form.as_p }}
+        <button type="submit">Word Count</button>
+    </form>
+    <form action="{% url 'clear_memory' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Clear Memory</button>
+    </form>
+    {% if count %}
+    <p>Count of '{{ word }}': {{ count }}</p>
+    {% endif %}
+</body>
+</html>
